@@ -28,6 +28,12 @@ public class CustomListTest {
 	@Test
 	public void testAdd() {
 		CustomList<String> customList = new CustomList<String>();
+		
+		String firstEl = "firstElement"; 
+		customList.add(firstEl);
+		
+		String[] expectedList = {firstEl };
+		assertArrayEquals(expectedList , customList.toArray(new String[0]));
 	}
 
 }
