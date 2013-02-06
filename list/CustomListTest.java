@@ -82,12 +82,14 @@ public class CustomListTest {
 		String el1 = "firstElement1";
 		String el2 = "firstElement2";
 		String el3 = "firstElement3";
+		String el4 = "firstElement4";
 		customList.add(el0);
 		customList.add(el1);
 		customList.add(el3);
+		customList.add(el4);
 		customList.add(2, el2);
 
-		String[] expectedList = { el0, el1, el2, el3 };
+		String[] expectedList = { el0, el1, el2, el3, el4 };
 		assertArrayEquals(expectedList, customList.toArray(new String[0]));
 	}
 

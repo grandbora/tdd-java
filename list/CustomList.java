@@ -25,23 +25,15 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public void add(int index, T element) {
-		
+
 		Object[] newElementList = new Object[elementList.length + 1];
-		for (int i = 0; i < newElementList.length; i++) {
-			
-			if (i < index) {
-				newElementList[i] = elementList[i];				
-			}
-			
-			if (i > index) {
-				newElementList[i] = elementList[i -1];				
-			}
-			
-			if (i == index) {
-				newElementList[i] = element;
-			}
-		}
-		elementList = newElementList; 
+		
+		for (int i = 0; i < elementList.length; i++)
+			newElementList[i < index ? i : i + 1] = elementList[i];
+
+		newElementList[index] = element;
+
+		elementList = newElementList;
 	}
 
 	@Override
