@@ -10,13 +10,6 @@ public class CustomList<T> implements List<T> {
 
 	Object[] elementList = new Object[0];
 
-	@Override
-	public boolean add(T e) {
-		elementList = Arrays.copyOf(elementList, elementList.length + 1);
-		elementList[elementList.length - 1] = e;
-		return true;
-	}
-
 	@SuppressWarnings({ "unchecked", "hiding" })
 	@Override
 	public <T> T[] toArray(T[] a) {
@@ -24,10 +17,17 @@ public class CustomList<T> implements List<T> {
 	}
 
 	@Override
+	public boolean add(T e) {
+		elementList = Arrays.copyOf(elementList, elementList.length + 1);
+		elementList[elementList.length - 1] = e;
+		return true;
+	}
+
+	@Override
 	public void add(int index, T element) {
 
 		Object[] newElementList = new Object[elementList.length + 1];
-		
+
 		for (int i = 0; i < elementList.length; i++)
 			newElementList[i < index ? i : i + 1] = elementList[i];
 
@@ -36,10 +36,17 @@ public class CustomList<T> implements List<T> {
 		elementList = newElementList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(Collection<? extends T> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (0 == c.size())
+			return false;
+
+		Object[] toBeAppended = c.toArray();
+		for (int i = 0; i < toBeAppended.length; i++)
+			this.add((T) toBeAppended[i]);
+
+		return true;
 	}
 
 	@Override
