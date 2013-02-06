@@ -25,8 +25,23 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public void add(int index, T element) {
-		// TODO Auto-generated method stub
-
+		
+		Object[] newElementList = new Object[elementList.length + 1];
+		for (int i = 0; i < newElementList.length; i++) {
+			
+			if (i < index) {
+				newElementList[i] = elementList[i];				
+			}
+			
+			if (i > index) {
+				newElementList[i] = elementList[i -1];				
+			}
+			
+			if (i == index) {
+				newElementList[i] = element;
+			}
+		}
+		elementList = newElementList; 
 	}
 
 	@Override

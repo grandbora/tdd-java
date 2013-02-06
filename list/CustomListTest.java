@@ -9,6 +9,8 @@ import org.junit.Test;
 
 public class CustomListTest {
 
+	CustomList<String> customList;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -19,6 +21,7 @@ public class CustomListTest {
 
 	@Before
 	public void setUp() throws Exception {
+		customList = new CustomList<String>();
 	}
 
 	@After
@@ -27,13 +30,65 @@ public class CustomListTest {
 
 	@Test
 	public void testAdd() {
-		CustomList<String> customList = new CustomList<String>();
-		
-		String firstEl = "firstElement"; 
+		String firstEl = "firstElement";
 		customList.add(firstEl);
+
+		String[] expectedList = { firstEl };
+		assertArrayEquals(expectedList, customList.toArray(new String[0]));
+	}
+
+	 @Test
+	 public void testAddWithIndexToEmptyList() {
+		 String el0 = "firstElement0";
+		 customList.add(0, el0);
 		
-		String[] expectedList = {firstEl };
-		assertArrayEquals(expectedList , customList.toArray(new String[0]));
+		 String[] expectedList = { el0 };
+		 assertArrayEquals(expectedList, customList.toArray(new String[0]));
+	 }
+	 
+	 @Test
+	 public void testAddWithIndexToEnd() {
+		 String el0 = "firstElement0";
+		 String el1 = "firstElement1";
+		 String el2 = "firstElement2";
+		 String el3 = "firstElement3";
+		 customList.add(el0);
+		 customList.add(el1);
+		 customList.add(el2);
+		 customList.add(3, el3);
+		
+		 String[] expectedList = { el0, el1, el2, el3 };
+		 assertArrayEquals(expectedList, customList.toArray(new String[0]));
+	 }
+	 
+	 @Test
+	 public void testAddWithIndexToBeginning() {
+		 String el0 = "firstElement0";
+		 String el1 = "firstElement1";
+		 String el2 = "firstElement2";
+		 String el3 = "firstElement3";
+		 customList.add(0, el0);
+		 customList.add(el1);
+		 customList.add(el2);
+		 customList.add(el3);
+		
+		 String[] expectedList = { el0, el1, el2, el3 };
+		 assertArrayEquals(expectedList, customList.toArray(new String[0]));
+	 }
+
+	@Test
+	public void testAddWithIndexToMiddle() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el3);
+		customList.add(2, el2);
+
+		String[] expectedList = { el0, el1, el2, el3 };
+		assertArrayEquals(expectedList, customList.toArray(new String[0]));
 	}
 
 }
