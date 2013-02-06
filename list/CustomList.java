@@ -1,5 +1,6 @@
 package list;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -7,22 +8,25 @@ import java.util.ListIterator;
 
 public class CustomList<T> implements List<T> {
 
+	Object[] elementList = new Object[0];
+
 	@Override
 	public boolean add(T e) {
-		// TODO Auto-generated method stub
-		return false;
+		elementList = Arrays.copyOf(elementList, elementList.length + 1);
+		elementList[elementList.length - 1] = e;
+		return true;
 	}
-	
+
+	@SuppressWarnings({ "unchecked", "hiding" })
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		return (T[]) elementList;
 	}
 
 	@Override
 	public void add(int index, T element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class CustomList<T> implements List<T> {
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -144,7 +148,5 @@ public class CustomList<T> implements List<T> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 }
