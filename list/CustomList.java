@@ -39,7 +39,7 @@ public class CustomList<T> implements List<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(Collection<? extends T> c) {
-		if (0 == c.size())
+		if (c.isEmpty())
 			return false;
 
 		Object[] toBeAppended = c.toArray();
@@ -49,46 +49,66 @@ public class CustomList<T> implements List<T> {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addAll(int index, Collection<? extends T> c) {
-		// TODO Auto-generated method stub
-		return false;
+		if (c.isEmpty())
+			return false;
+
+		Object[] toBeAppended = c.toArray();
+		for (int i = 0; i < toBeAppended.length; i++) {
+			this.add(index + i, (T) toBeAppended[i]);
+		}
+
+		return true;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		elementList = new Object[0];
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < elementList.length; i++) {
+			if (elementList[i].equals(o))
+				return true;
+		}
+
 		return false;
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		Object[] needleList = c.toArray();
+		for (int i = 0; i < needleList.length; i++) {
+			if (false == this.contains(needleList[i]))
+				return false;
+		}
+
+		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return (T) elementList[index];
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		for (int i = 0; i < elementList.length; i++) {
+			if (elementList[i].equals(o))
+				return i;
+		}
+
+		return -1;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return 0 == elementList.length;
 	}
 
 	@Override
@@ -99,8 +119,7 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 	@Override
