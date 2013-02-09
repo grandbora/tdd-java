@@ -7,6 +7,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 public class TestLinkedNodeReverser {
 
@@ -36,8 +38,14 @@ public class TestLinkedNodeReverser {
 
 	@Test
 	public void testGetTailWithMockedObjects() {
-
 		
+		LinkedNode linkedNode0 = Mockito.mock(LinkedNode.class);
+		Mockito.when(linkedNode0.next()).thenReturn(null);
+
+		LinkedNodeReverser linkedNodeReverser = new LinkedNodeReverser(
+				linkedNode0);
+
+		assertSame(linkedNode0, linkedNodeReverser.getTail());
 	}
 	
 	@Test
@@ -145,5 +153,4 @@ public class TestLinkedNodeReverser {
 		assertSame(linkedNode1, linkedNode0.before());
 		assertNull(linkedNode0.next());
 	}
-
 }
