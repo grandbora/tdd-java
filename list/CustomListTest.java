@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Stack;
 
 import org.junit.After;
 import org.junit.AfterClass;
