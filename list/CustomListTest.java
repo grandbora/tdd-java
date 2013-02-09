@@ -791,9 +791,9 @@ public class CustomListTest {
 		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
 		assertFalse(result);
 	}
-	
+
 	@Test
-	public void testRetainAllWithAllExistingCollectionElements() {
+	public void testSet() {
 		String el0 = "firstElement0";
 		String el1 = "firstElement1";
 		String el2 = "firstElement2";
@@ -804,19 +804,10 @@ public class CustomListTest {
 		customList.add(el1);
 		customList.add(el2);
 		customList.add(el3);
-		customList.add(el4);
 
-		ArrayList<String> toBeRetainedList = new ArrayList<String>();
-		toBeRetainedList.add(el0);
-		toBeRetainedList.add(el1);
-		toBeRetainedList.add(el2);
-		toBeRetainedList.add(el3);
-		toBeRetainedList.add(el4);
-		toBeRetainedList.add("anExtraElement");
-
-		Boolean result = customList.retainAll(toBeRetainedList);
-		String[] expectedList1 = { el0, el1, el2, el3, el4 };
+		String returnedObject = customList.set(2, el4);
+		String[] expectedList1 = { el0, el1, el4, el3 };
 		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
-		assertFalse(result);
+		assertSame(el2, returnedObject);
 	}
 }

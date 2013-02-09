@@ -178,21 +178,22 @@ public class CustomList<T> implements List<T> {
 	@Override
 	public boolean retainAll(Collection<?> c) {
 		Boolean hasChanged = false;
-		Object[] originalElementList = elementList.clone(); 
+		Object[] originalElementList = elementList.clone();
 		for (int i = 0; i < originalElementList.length; i++) {
 			if (false == c.contains(originalElementList[i])) {
 				this.remove(originalElementList[i]);
 				hasChanged = true;
 			}
 		}
-		
+
 		return hasChanged;
 	}
 
 	@Override
 	public T set(int index, T element) {
-		// TODO Auto-generated method stub
-		return null;
+		T returnObject = this.get(index);
+		elementList[index] = element;
+		return returnObject;
 	}
 
 	@Override
