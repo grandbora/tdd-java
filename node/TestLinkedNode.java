@@ -42,7 +42,7 @@ public class TestLinkedNode {
 	}
 
 	@Test
-	public void testSetNext() {
+	public void testSetNextWithNode() {
 		LinkedNode linkedNode1 = new LinkedNode("node1");
 		LinkedNode linkedNode2 = new LinkedNode("node2");
 
@@ -53,6 +53,17 @@ public class TestLinkedNode {
 
 		assertSame(linkedNode1, linkedNode2.before());
 		assertNull(linkedNode2.next());
+	}
+
+	@Test
+	public void testSetNextWithNull() {
+		LinkedNode linkedNode1 = new LinkedNode("node1");
+		LinkedNode linkedNode2 = new LinkedNode("node2");
+
+		linkedNode1.setNext(linkedNode2);
+		linkedNode1.setNext(null);
+
+		assertNull(linkedNode1.next());
 	}
 
 	@Test
@@ -67,19 +78,19 @@ public class TestLinkedNode {
 		linkedNode2.setNext(linkedNode3);
 		linkedNode3.setNext(linkedNode4);
 		linkedNode4.setNext(linkedNode5);
-		
+
 		assertNull(linkedNode1.before());
 		assertSame(linkedNode2, linkedNode1.next());
-		
+
 		assertSame(linkedNode1, linkedNode2.before());
 		assertSame(linkedNode3, linkedNode2.next());
-		
+
 		assertSame(linkedNode2, linkedNode3.before());
 		assertSame(linkedNode4, linkedNode3.next());
-		
+
 		assertSame(linkedNode3, linkedNode4.before());
 		assertSame(linkedNode5, linkedNode4.next());
-		
+
 		assertSame(linkedNode4, linkedNode5.before());
 		assertNull(linkedNode5.next());
 	}
