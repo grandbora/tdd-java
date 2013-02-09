@@ -35,6 +35,12 @@ public class TestLinkedNodeReverser {
 	}
 
 	@Test
+	public void testGetTailWithMockedObjects() {
+
+		
+	}
+	
+	@Test
 	public void testGetTail() {
 		LinkedNode linkedNode0 = new LinkedNode("node0");
 		LinkedNode linkedNode1 = new LinkedNode("node1");
@@ -72,6 +78,7 @@ public class TestLinkedNodeReverser {
 		linkedNodeReverser.reverse();
 
 		assertSame(linkedNode0, linkedNodeReverser.getHead());
+		assertSame(linkedNode0, linkedNodeReverser.getTail());
 		assertNull(linkedNode0.before());
 		assertNull(linkedNode0.next());
 	}
@@ -88,6 +95,7 @@ public class TestLinkedNodeReverser {
 		linkedNodeReverser.reverse();
 
 		assertSame(linkedNode1, linkedNodeReverser.getHead());
+		assertSame(linkedNode0, linkedNodeReverser.getTail());
 
 		assertNull(linkedNode1.before());
 		assertSame(linkedNode0, linkedNode1.next());
@@ -117,6 +125,7 @@ public class TestLinkedNodeReverser {
 		linkedNodeReverser.reverse();
 		
 		assertSame(linkedNode5, linkedNodeReverser.getHead());
+		assertSame(linkedNode0, linkedNodeReverser.getTail());
 
 		assertNull(linkedNode5.before());
 		assertSame(linkedNode4, linkedNode5.next());
