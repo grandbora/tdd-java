@@ -549,4 +549,63 @@ public class CustomListTest {
 		result = customList.lastIndexOf(el3);
 		assertSame(9, result);
 	}
+
+	@Test
+	public void testRemoveNonExistingELement() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+
+		Boolean result = customList.remove("nonExistingString");
+		String[] expectedList1 = { el0, el1, el2, el3 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertFalse(result);
+	}
+
+	@Test
+	public void testRemoveFromEMptyList() {
+		Boolean result = customList.remove("fromEMptyElemenet");
+		String[] expectedList1 = {};
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertFalse(result);
+	}
+
+	@Test
+	public void testRemoveExistingElement() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+
+		Boolean result = customList.remove(el2);
+		String[] expectedList1 = { el0, el1, el3 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		result = customList.remove(el1);
+		String[] expectedList2 = { el0, el3 };
+		assertArrayEquals(expectedList2, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		result = customList.remove(el0);
+		String[] expectedList3 = { el3 };
+		assertArrayEquals(expectedList3, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		result = customList.remove(el3);
+		String[] expectedList4 = {};
+		assertArrayEquals(expectedList4, customList.toArray(new String[0]));
+		assertTrue(result);
+	}
 }

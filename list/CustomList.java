@@ -119,12 +119,12 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public int lastIndexOf(Object o) {
-		
-		for (int i = elementList.length -1; i > -1; i--) {
+
+		for (int i = elementList.length - 1; i > -1; i--) {
 			if (elementList[i].equals(o))
 				return i;
 		}
-		
+
 		return -1;
 	}
 
@@ -142,8 +142,17 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		int elementIndex = this.indexOf(o);
+		if (-1 == elementIndex)
+			return false;
+
+		for (int i = 0; i < elementList.length; i++) {
+			elementList[i <= elementIndex ? i : i - 1] = elementList[i];
+		}
+		
+		elementList = Arrays.copyOf(elementList, elementList.length - 1);
+		
+		return true;
 	}
 
 	@Override
