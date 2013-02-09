@@ -15,6 +15,12 @@ public class CustomList<T> implements List<T> {
 	public <T> T[] toArray(T[] a) {
 		return (T[]) elementList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object[] toArray() {
+		return (T[]) elementList;
+	}
 
 	@Override
 	public boolean add(T e) {
@@ -198,20 +204,15 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return elementList.length;
 	}
 
 	@Override
 	public List<T> subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		List<T> returnList = new CustomList<T>();
+		for (int i = fromIndex; i < toIndex; i++) {
+			returnList.add(this.get(i));
+		}
+		return returnList;
 	}
-
-	@Override
-	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

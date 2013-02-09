@@ -2,6 +2,7 @@ package list;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -30,6 +31,29 @@ public class CustomListTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testToArray() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+
+		String[] expectedList0 = {};
+		assertArrayEquals(expectedList0, customList.toArray());
+		assertArrayEquals(expectedList0, customList.toArray(new String[0]));
+		customList.add(el0);
+		String[] expectedList1 = { el0 };
+		assertArrayEquals(expectedList1, customList.toArray());
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		customList.add(el1);
+		String[] expectedList2 = { el0, el1 };
+		assertArrayEquals(expectedList2, customList.toArray());
+		assertArrayEquals(expectedList2, customList.toArray(new String[0]));
+		customList.add(el2);
+		String[] expectedList3 = { el0, el1, el2 };
+		assertArrayEquals(expectedList3, customList.toArray());
+		assertArrayEquals(expectedList3, customList.toArray(new String[0]));
 	}
 
 	@Test
@@ -809,5 +833,47 @@ public class CustomListTest {
 		String[] expectedList1 = { el0, el1, el4, el3 };
 		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
 		assertSame(el2, returnedObject);
+	}
+
+	@Test
+	public void testSize() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		assertSame(0, customList.size());
+		customList.add(el0);
+		assertSame(1, customList.size());
+		customList.add(el1);
+		assertSame(2, customList.size());
+		customList.add(el1);
+		assertSame(3, customList.size());
+		customList.add(el2);
+		customList.add(el3);
+		assertSame(5, customList.size());
+		customList.clear();
+		assertSame(0, customList.size());
+	}
+
+	@Test
+	public void testSublist() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+		String el5 = "firstElement5";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+		customList.add(el5);
+
+		List<String> sublist = customList.subList(1, 4);
+		String[] expectedList1 = { el1, el2, el3 };
+		assertArrayEquals(expectedList1, sublist.toArray(new String[0]));
 	}
 }
