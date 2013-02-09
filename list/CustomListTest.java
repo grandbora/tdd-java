@@ -433,20 +433,32 @@ public class CustomListTest {
 	}
 
 	@Test
-	public void testIndexOfExistingElementAddedtwice() {
+	public void testIndexOfExistingElementWithDuplication() {
 		String el0 = "firstElement0";
 		String el1 = "firstElement1";
 		String el2 = "firstElement2";
 		String el3 = "firstElement3";
 
-		customList.add(el0);
-		customList.add(el1);
+		customList.add(el3);
 		customList.add(el1);
 		customList.add(el2);
+		customList.add(el0);
+		customList.add(el2);
 		customList.add(el3);
+		customList.add(el0);
+		customList.add(el0);
+		customList.add(el3);
+		customList.add(el0);
+		customList.add(el1);
 
-		int result = customList.indexOf(el1);
+		int result = customList.indexOf(el0);
+		assertSame(3, result);
+		result = customList.indexOf(el1);
 		assertSame(1, result);
+		result = customList.indexOf(el2);
+		assertSame(2, result);
+		result = customList.indexOf(el3);
+		assertSame(0, result);
 	}
 
 	@Test
@@ -488,4 +500,53 @@ public class CustomListTest {
 		assertSame(-1, result);
 	}
 
+	@Test
+	public void testLastIndexOfExistingWithoutDuplication() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+
+		int result = customList.lastIndexOf(el0);
+		assertSame(0, result);
+		result = customList.lastIndexOf(el1);
+		assertSame(1, result);
+		result = customList.lastIndexOf(el2);
+		assertSame(2, result);
+		result = customList.lastIndexOf(el3);
+		assertSame(3, result);
+	}
+
+	@Test
+	public void testLastIndexOfExistingWithDuplication() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		customList.add(el3);
+		customList.add(el1);
+		customList.add(el0);
+		customList.add(el2);
+		customList.add(el1);
+		customList.add(el1);
+		customList.add(el3);
+		customList.add(el2);
+		customList.add(el0);
+		customList.add(el3);
+
+		int result = customList.lastIndexOf(el0);
+		assertSame(8, result);
+		result = customList.lastIndexOf(el1);
+		assertSame(5, result);
+		result = customList.lastIndexOf(el2);
+		assertSame(7, result);
+		result = customList.lastIndexOf(el3);
+		assertSame(9, result);
+	}
 }

@@ -119,6 +119,12 @@ public class CustomList<T> implements List<T> {
 
 	@Override
 	public int lastIndexOf(Object o) {
+		
+		for (int i = elementList.length -1; i > -1; i--) {
+			if (elementList[i].equals(o))
+				return i;
+		}
+		
 		return -1;
 	}
 
