@@ -146,31 +146,47 @@ public class CustomList<T> implements List<T> {
 		if (-1 == elementIndex)
 			return false;
 
-		for (int i = 0; i < elementList.length; i++) {
-			elementList[i <= elementIndex ? i : i - 1] = elementList[i];
-		}
-		
-		elementList = Arrays.copyOf(elementList, elementList.length - 1);
-		
+		this.remove(elementIndex);
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Object elementToBeRemoved = elementList[index];
+		for (int i = 0; i < elementList.length; i++) {
+			elementList[i <= index ? i : i - 1] = elementList[i];
+		}
+
+		elementList = Arrays.copyOf(elementList, elementList.length - 1);
+
+		return (T) elementToBeRemoved;
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean hasChanged = false;
+		Object[] toBeRemovedList = c.toArray();
+		for (int i = 0; i < toBeRemovedList.length; i++) {
+			if (this.remove(toBeRemovedList[i]))
+				hasChanged = true;
+		}
+
+		return hasChanged;
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean hasChanged = false;
+		Object[] originalElementList = elementList.clone(); 
+		for (int i = 0; i < originalElementList.length; i++) {
+			if (false == c.contains(originalElementList[i])) {
+				this.remove(originalElementList[i]);
+				hasChanged = true;
+			}
+		}
+		
+		return hasChanged;
 	}
 
 	@Override

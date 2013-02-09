@@ -608,4 +608,215 @@ public class CustomListTest {
 		assertArrayEquals(expectedList4, customList.toArray(new String[0]));
 		assertTrue(result);
 	}
+
+	@Test
+	public void testRemoveWithIndex() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+
+		String returnedObject = customList.remove(2);
+		String[] expectedList1 = { el0, el1, el3 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertSame(el2, returnedObject);
+
+		returnedObject = customList.remove(0);
+		String[] expectedList2 = { el1, el3 };
+		assertArrayEquals(expectedList2, customList.toArray(new String[0]));
+		assertSame(el0, returnedObject);
+
+		returnedObject = customList.remove(1);
+		String[] expectedList3 = { el1 };
+		assertArrayEquals(expectedList3, customList.toArray(new String[0]));
+		assertSame(el3, returnedObject);
+
+		returnedObject = customList.remove(0);
+		String[] expectedList4 = {};
+		assertArrayEquals(expectedList4, customList.toArray(new String[0]));
+		assertSame(el1, returnedObject);
+	}
+
+	@Test
+	public void testRemoveAllWithExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRemovedList = new ArrayList<String>();
+		toBeRemovedList.add(el0);
+		toBeRemovedList.add(el3);
+
+		Boolean result = customList.removeAll(toBeRemovedList);
+		String[] expectedList1 = { el1, el2, el4 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		toBeRemovedList = new ArrayList<String>();
+		toBeRemovedList.add(el1);
+		toBeRemovedList.add(el2);
+
+		result = customList.removeAll(toBeRemovedList);
+		String[] expectedList2 = { el4 };
+		assertArrayEquals(expectedList2, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		toBeRemovedList = new ArrayList<String>();
+		toBeRemovedList.add(el4);
+
+		result = customList.removeAll(toBeRemovedList);
+		String[] expectedList3 = {};
+		assertArrayEquals(expectedList3, customList.toArray(new String[0]));
+		assertTrue(result);
+	}
+
+	@Test
+	public void testRemoveAllWithNonExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRemovedList = new ArrayList<String>();
+		toBeRemovedList.add("thisDoesNotExist");
+		toBeRemovedList.add("neitherThis");
+
+		Boolean result = customList.removeAll(toBeRemovedList);
+		String[] expectedList1 = { el0, el1, el2, el3, el4 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertFalse(result);
+	}
+
+	@Test
+	public void testRetainAllWithExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRetainedList = new ArrayList<String>();
+		toBeRetainedList.add(el4);
+		toBeRetainedList.add(el1);
+		toBeRetainedList.add(el3);
+
+		Boolean result = customList.retainAll(toBeRetainedList);
+		String[] expectedList1 = { el1, el3, el4 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertTrue(result);
+
+		toBeRetainedList = new ArrayList<String>();
+		toBeRetainedList.add(el3);
+
+		result = customList.retainAll(toBeRetainedList);
+		String[] expectedList2 = { el3 };
+		assertArrayEquals(expectedList2, customList.toArray(new String[0]));
+		assertTrue(result);
+	}
+
+	@Test
+	public void testRetainAllWithNonExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRetainedList = new ArrayList<String>();
+		toBeRetainedList.add("thisDoesNotExist");
+		toBeRetainedList.add("neitherThis");
+
+		Boolean result = customList.retainAll(toBeRetainedList);
+		String[] expectedList1 = {};
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertTrue(result);
+	}
+
+	@Test
+	public void testRetainAllWithAllExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRetainedList = new ArrayList<String>();
+		toBeRetainedList.add(el0);
+		toBeRetainedList.add(el1);
+		toBeRetainedList.add(el2);
+		toBeRetainedList.add(el3);
+		toBeRetainedList.add(el4);
+		toBeRetainedList.add("anExtraElement");
+
+		Boolean result = customList.retainAll(toBeRetainedList);
+		String[] expectedList1 = { el0, el1, el2, el3, el4 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertFalse(result);
+	}
+	
+	@Test
+	public void testRetainAllWithAllExistingCollectionElements() {
+		String el0 = "firstElement0";
+		String el1 = "firstElement1";
+		String el2 = "firstElement2";
+		String el3 = "firstElement3";
+		String el4 = "firstElement4";
+
+		customList.add(el0);
+		customList.add(el1);
+		customList.add(el2);
+		customList.add(el3);
+		customList.add(el4);
+
+		ArrayList<String> toBeRetainedList = new ArrayList<String>();
+		toBeRetainedList.add(el0);
+		toBeRetainedList.add(el1);
+		toBeRetainedList.add(el2);
+		toBeRetainedList.add(el3);
+		toBeRetainedList.add(el4);
+		toBeRetainedList.add("anExtraElement");
+
+		Boolean result = customList.retainAll(toBeRetainedList);
+		String[] expectedList1 = { el0, el1, el2, el3, el4 };
+		assertArrayEquals(expectedList1, customList.toArray(new String[0]));
+		assertFalse(result);
+	}
 }
